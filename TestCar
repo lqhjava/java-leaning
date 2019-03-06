@@ -1,0 +1,49 @@
+# java-leaning
+This is  I learn java
+class Car{
+	//车的属性
+	private String color ;
+	private double weight ;
+	private String name ;
+	
+	public  String setColor(String color){
+		this.color = color;
+		return color;
+	}
+	public String getColor(String color){
+		this.color = color;
+		return color;
+	}
+	public  String setName(String name){
+		this.name = name;
+		return name;
+	}
+	public String getName(String name){
+		this.name = name;
+		return name;
+	}
+	
+	//行为
+	public  void Drive(){
+	System.out.println(this.color+this.name+"他可以开");
+	}
+	public void Change(){
+	System.out.println(this.color+this.name+"他可以变形");
+	}
+	
+	//构造方法
+	public Car(String name,String color){
+		this.name = name;
+		this.color = color;
+	}
+}
+public class TestCar{
+public static void main(String[] args){
+		Car car = new Car("大黄蜂","黄色");
+		car.setColor("红色");
+		car.setName("擎天柱");
+		car.Drive();
+		car.Change();
+		
+	}
+}

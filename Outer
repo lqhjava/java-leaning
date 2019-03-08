@@ -1,0 +1,60 @@
+# java-leaning
+This is  I learn java
+//外部类
+class Outer{
+	//外部类的成员属性
+	private String msg = "外部类的成员属性";
+	
+	public String getMsg(String msg){
+		return msg;
+	}
+	
+	//外部类方法
+	public void Print(){
+		System.out.println(this.msg);
+		//要想在外部类调用内部类的成员属性或方法
+	    //需要现在外部类中对内部类进行实例化
+		Inner in = new Inner();
+	    in.Print();
+	}
+	//外部类调用内部类的成员属性或方法
+	//通过外部类的方法传入内部类的对象
+	public void Print(Inner in){
+		in.Print();
+		
+	}
+	
+	
+	
+	 //内部类
+	 class Inner{
+	 
+	 //内部类的成员属性
+		private String msg = "内部类的成员属性";
+		
+	 
+		public String getMsg(String msg){
+		return msg;
+	}
+	//内部类的方法
+	public void Print(){
+	/*
+	内部类可以直接访问外部类的成员属性
+	*/
+		System.out.println("内部类访问"+msg);
+	}
+	 }
+
+}
+public class TestOuter{
+	public static void main(String[] args){
+		//创建外部类的对象
+		Outer out = new Outer();
+		out.Print();
+		//创建内部类的对象需要现实例化外部类的对象
+		Outer.Inner in = out.new Inner();
+		in.Print();
+
+
+	}
+}

@@ -1,0 +1,84 @@
+# java-leaning
+This is  I learn java
+public class PersonTest{
+	
+	private String name;
+	private String post;
+	private String gender;
+	private int age;
+	private long tel;
+	private String adres;
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	public String getName(String name){
+		return this.name;
+	}
+	public void setPost(String post){
+		this.post = post;
+	}
+	public String getPost(String post){
+		return this.post;
+	}
+	public void setGender(String gender){
+		this.gender = gender;
+	}
+	public String getGender(String gender){
+		return this.gender;
+	}
+	public void setAge(int age){
+		this.age = age;
+	}
+	public int getAge(int age){
+		return this.age;
+	}
+	public void setTel(long tel){
+		this.tel =tel;
+	}
+	public long getTel(long tel){
+		return this.tel;
+	}
+	public void setAdres(String adres){
+		this.adres = adres;
+	}
+	public String getAdres(String adres){
+		return this.adres;
+	}
+	
+	public PersonTest(String name,int age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	public void print(int chinese){
+		if(chinese == 1){
+			System.out.println("姓名:"+this.name+"             "+"职位:"+this.post);
+			System.out.println("性别:"+this.gender+"                 "+"年龄:"+this.age);
+			System.out.println("电话:"+this.tel+"         "+"地址:"+this.adres);
+		}else{
+			System.out.println("Name:"+this.name+"             "+"Post:"+this.post);
+			System.out.println("Sex:"+this.gender+"                 "+"Age:"+this.age);
+			System.out.println("Tel:"+this.tel+"         "+"Agres:"+this.adres);
+		}
+		
+		
+	}
+	
+
+	
+	
+	
+
+		public static void main(String[] args){
+			PersonTest hr = new PersonTest("梁清华",20);
+			hr.setGender("man");
+			hr.setAdres("西安");
+			hr.setPost("hr");
+			hr.setTel(12345678901L);
+			hr.print(1);
+			
+			
+		}
+}
+

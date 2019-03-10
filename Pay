@@ -1,0 +1,79 @@
+# java-leaning
+This is  I learn java
+public class Pay{
+	public static void main(String[] args){
+		Buy[] buy = new Buy[3];
+		 buy[0] = new Buy("T恤",245,2);
+		 buy[1] = new Buy("网球拍",570,1);
+		 buy[2] = new Buy("网球鞋",320,1);
+		for(int i =0;i <buy.length; i++ ){
+			buy[i].buyPrint();
+		}
+		
+		new Buy().cleaning(8,1500,
+		(buy[0].getBuy()*buy[0].getPrice()
+		+buy[1].getBuy()*buy[1].getPrice()
+		+buy[2].getBuy()*buy[2].getPrice()));
+		
+	}
+}
+	
+	
+class Buy{
+	private String name;
+	private double price;
+	private int buy;
+	
+	
+	
+	public void setNmae(String namr){
+		this.name = name;
+	}
+	public String getName(){
+		return this.name;
+	}
+	public void setPrice(double price){
+		this.price = price;
+	}
+	public double getPrice(){
+		return this.price;
+	}
+	public void setBuy(int buy){
+		this.buy = buy;
+	}
+	public int getBuy(){
+		return this.buy;
+	}
+	public Buy(){
+		
+	}
+	
+	public Buy(String name,double price,int buy){
+		this.name = name;
+		this.price = price;
+		this.buy = buy;
+		
+	}
+	static{
+		System.out.println("**************消费单************");
+		System.out.println("购买单价"+" "+"单价"+"\t"+"个数"+"\t"+"金额");
+	}
+	
+	public void buyPrint(){
+		
+	    
+			System.out.println(this.name+"\t"+" ¥"+this.price
+			+"\t"+this.buy+"\t"+this.buy*this.price );
+		
+	}
+	public void cleaning(double discount,double money,double expence){
+		
+		System.out.println("折扣："+"\t"+discount);
+		System.out.println("消费总金额："+"\t"+expence);
+		System.out.println("实际交费："+"\t"+money);
+		System.out.println("找零："+"\t"+(money-expence));
+		System.out.println("本次消费积分："+"\t"+expence*0.02);
+		
+		
+	}
+}

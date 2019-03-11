@@ -1,0 +1,136 @@
+# java-leaning
+This is  I learn java
+public class ExtendsTest{
+	public static void main(String[] args){
+		
+		//对父类进行实例化
+		//第一种
+		People p1 = new People("来拥有",20);
+		//第二种
+		//多态的体现
+		People p3 = new Chinese("王光辉",22,"英国");
+		p3.print();
+		
+		/*
+		父类实例化对象只能调用父类的方法，不能调用子类的方法
+		如果用父类对象调用子类的方法，会报错
+		p1.son();
+		 错误: 找不到符号
+                p1.son();
+		*/
+		
+		//对子类进行实例化
+		
+		Chinese p2 = new Chinese("王位",21,"中国");
+		
+		/*
+		此时子类会调用print方法，如果子类中没有print方法，
+		就会调用父类的方法
+		如果子类和父类的方法中都有print方法，
+		则子类的print方法对父类的print方法
+		进行了覆写，此时调用，只会调用子类中的print方法
+		子类可以父类的所有非 private 方法
+		*/
+		p2.print();
+		p2.father();
+		p2.son();
+		
+		/*
+		运行结果
+		子类的方法
+		姓名：王位      年龄：21        体重;0.0        国籍：中国
+		*/
+		/*
+		如果屏蔽子类的print方法，就会调用父类的方法
+		运行结果
+		父类的方法
+		姓名：王位      年龄：21        体重;0.0
+		*/
+		/*
+		如果子类和父类的方法中都有print方法，
+		此时子类想调用父类的print方法
+		则要将子类实例化的对象强转成父类类型
+		*/
+		//People p4 = (People)p3;
+		//p4.print();
+	}
+}
+
+//父类
+class People{
+	
+	//父类的属性
+	String name;
+	int age;
+	double weight;
+	private String msg = "父类的属性";
+	
+	public void setMsg(String msg){
+		this.msg = msg;
+	}
+	public String getMsg(){
+		return this.msg;
+	}
+	
+	
+	//父类的方法
+	public void print(){
+		System.out.println("父类的方法");
+		System.out.println("姓名："+this.name+"\t"
+		+"年龄："+this.age+"\t"+"体重;"+this.weight);
+	}
+	public void father(){
+		System.out.println("父类的方法");
+	}
+	
+	
+	//父类的构造方法
+	public People(String name, int age){
+		this.name = name;
+		this.age =age;
+	}
+}
+
+//子类
+class Chinese extends People{
+	//子类的属性
+	String country ;
+	private String  address = "中国";
+	
+	
+	public void setAddress(String address){
+		this.address = address;
+	}
+	public String getAddress(){
+		return this.address;
+	}
+	
+	
+	//子类的方法
+	public void print(){
+		System.out.println("子类的方法");
+		System.out.println("姓名："+this.name+"\t"
+		+"年龄："+this.age+"\t"+"体重;"+this.weight
+		+"\t"+"国籍："+this.country);
+	}
+	
+	public void son(){
+		System.out.println("子类的方法");
+	}
+	
+	//子类的构造方法
+	public Chinese(String name, int age,String country){
+		/*
+		子类的构造方法会先调用父类的构造方法，并且参数列表和父类的构造方法一致
+		如果父类没有构造方法或构造方法没有参数，
+		则子类的构造方法会隐式的调用父类的默认构造方法
+		调用时使用super关键字
+		super必须是第一行
+		*/
+		super(name,age);
+		this.country = country;
+		
+	}
+	
+	
+}

@@ -1,0 +1,115 @@
+# java-leaning
+This is  I learn java
+
+public class ParkCar{
+		public static void main(String[] args){
+			printCar("Autotruck");
+			
+		}
+    public static void printCar(String car){
+	if(car.equals("Car")){
+		ParkCarDesign a = new Car();
+		a.printParkCar();
+	}else if(car.equals("Bus")){
+		ParkCarDesign a = new Bus();
+		a.printParkCar();
+	}else if(car.equals("Autotruck")){
+		ParkCarDesign a = new Autotruck();
+		a.printParkCar();
+	}else if(car.equals("Motorbike")){
+		ParkCarDesign a = new Motorbike();
+		a.printParkCar();
+	}else{
+		System.out.println("未找到匹配车辆");
+	}
+    }
+}
+
+
+abstract class ParkCarDesign{
+	//这是一个设计停车的算法
+	public final void printParkCar(){
+	//1. 确认来车型号
+	 carType();
+	//2. 寻找匹配车型的停车位置
+	 findPlease();
+	//3. 将车开往停车位置
+	 driverCar();
+	//4. 停车
+	 parkCar();
+	}
+	
+	public abstract void carType();
+	public abstract void findPlease();
+	public abstract void driverCar();
+	public abstract void parkCar();
+	
+}
+
+
+class Bus extends ParkCarDesign{
+	public void carType(){
+		System.out.println("想要停车的为公交车");
+	}
+	public void findPlease(){
+		System.out.println("该车应停在A区");
+	}
+	public void driverCar(){
+		System.out.println("将车开往A区");
+	}
+	public void parkCar(){
+		System.out.println("车已经停在A区");
+	}
+	
+}
+
+
+class Autotruck extends ParkCarDesign{
+	public void carType(){
+		System.out.println("想要停车的为大卡车");
+	}
+	public void findPlease(){
+		System.out.println("该车应停在B区");
+	}
+	public void driverCar(){
+		System.out.println("将车开往B区");
+	}
+	public void parkCar(){
+		System.out.println("车已经停在B区");
+	}
+	
+}
+
+class Motorbike extends ParkCarDesign{
+	public void carType(){
+		System.out.println("想要停车的为摩托车");
+	}
+	public void findPlease(){
+		System.out.println("该车应停在C区");
+	}
+	public void driverCar(){
+		System.out.println("将车开往C区");
+	}
+	public void parkCar(){
+		System.out.println("车已经停在C区");
+	}
+	
+}
+
+class Car extends ParkCarDesign{
+	public void carType(){
+		System.out.println("想要停车的为小轿车");
+	}
+	public void findPlease(){
+		System.out.println("该车应停在D区");
+	}
+	public void driverCar(){
+		System.out.println("将车开往D区");
+	}
+	public void parkCar(){
+		System.out.println("车已经停在D区");
+	}
+	
+}
+
+

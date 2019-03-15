@@ -1,0 +1,121 @@
+# java-leaning
+This is  I learn java
+public class TestInterface{
+		public static void main(String[] args){
+		ParkCar car = Factory.getCar("Bus");
+		car.printParkCar();
+		
+		}
+}
+
+/*
+接口：关键字 interface
+1. 接口里的方法都是抽象的
+2. 接口必须要子类来实现
+   接口可以多实现
+   关键字 implments
+   class A implements B,c
+3. 接口也可以继承接口
+4. 抽象类也继承接口
+5. 一个类可以先继承一个抽象类在实现接口
+*/
+
+interface ParkCar{
+	/*
+	借口里的方法修饰词都是public 可以省略不写
+	*/
+
+	void printParkCar();
+}
+
+abstract class Park{
+	public void printParkCar(){
+		//1. 确定车的型号
+		carType();
+		//2. 确定停车区域
+		findPlese();
+		//3. 将车开往指定区域
+		driverCar();
+        //4.停车
+		parkCar();
+	}
+	public abstract void carType();
+	public abstract void findPlese();
+	public abstract void driverCar();
+	public abstract void parkCar();
+}
+
+class Bus extends Park implements ParkCar{
+	public void carType(){
+		System.out.println("车辆为公交车");
+	}
+	
+	public void findPlese(){
+		System.out.println("公交车应停在A区");
+	}
+	
+	public void driverCar(){
+		System.out.println("将公交车开往A区");
+	}
+	
+	public void parkCar(){
+		System.out.println("将公交车停在A区");
+	}
+}
+
+class Motou extends Park implements ParkCar{
+	public void carType(){
+		System.out.println("车辆为摩托车");
+	}
+	
+	public void findPlese(){
+		System.out.println("摩托车应停在C区");
+	}
+	
+	public void driverCar(){
+		System.out.println("将摩托车开往C区");
+	}
+	
+	public void parkCar(){
+		System.out.println("将摩托车停在C区");
+	}
+}
+
+class BigCar extends Park implements ParkCar{
+	public void carType(){
+		System.out.println("车辆为大卡车");
+	}
+	
+	public void findPlese(){
+		System.out.println("大卡车应停在D区");
+	}
+	
+	public void driverCar(){
+		System.out.println("将大卡车开往D区");
+	}
+	
+	public void parkCar(){
+		System.out.println("将大卡车停在D区");
+	}
+}
+
+
+//通过一个工厂来让子类决定创建那个对象
+class Factory{
+	public static ParkCar getCar(String car){
+		ParkCar a = null;
+	 if(car.equals("Bus")){
+		a = new Bus();
+		return a;
+	}else if(car.equals("Autotruck")){
+		a = new Motou();
+		return a;
+	}else if(car.equals("Motorbike")){
+	a = new BigCar();
+		return a;
+	}else{
+		System.out.println("未找到匹配车辆");
+		return null;
+	}
+	}
+}

@@ -1,0 +1,56 @@
+# java-leaning
+This is  I learn java
+//代理设计模式
+public class TestCompany{
+		public static void main(String[] args){
+		IIWantFly i =Factory.getIIWantFly();
+		i.print();
+		}
+}
+
+interface IIWantFly{
+	
+	void print();
+}
+
+class Fly implements IIWantFly{
+	public void print(){
+		System.out.println("我上天了");
+	}
+}
+//通过工厂将实例化那个对象
+class Factory{
+	 public static IIWantFly getIIWantFly(){
+		 return new Ready(new Fly()) ; 
+		 } 
+}
+
+//上面的代码就已经实现了真实的业务
+//如果要进行补充，又不想违背oop原则
+//就可以使用代理设计模式
+
+
+class Ready  implements IIWantFly{
+	private IIWantFly iwantfly;
+    public Ready(IIWantFly iwantfly){
+	this.iwantfly = iwantfly;
+	}
+	
+    //需要补充的业务
+	public void ready(){
+		System.out.println("我准备上天了");
+	}
+	
+	public void end(){
+		System.out.println("我下来了");
+	}
+	
+	//覆写真实业务中的方法
+	public void print(){
+		this.ready();
+		//调用真实业务的方法
+		this.iwantfly.print();
+		this.end();
+	}
+
+}

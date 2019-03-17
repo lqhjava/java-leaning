@@ -1,0 +1,109 @@
+# java-leaning
+This is  I learn java
+import java.util.Scanner;
+public class PayTest{
+		public static void main(String[] args){
+		 Goods[] goods = new Goods[3]; 
+		 Scanner scanner = new Scanner(System.in);
+		 
+		for(int i=0; i<goods.length; i++){
+			System.out.println("请输入物品信息，格式如下，以空格隔开");
+			System.out.println("商品名称 商品价格 商品个数");
+			//用字符类型来接受控制台的输入
+			String line = scanner.nextLine();
+			//将控制台输入的内容转换成字符数组，然后赋值给goods
+			//split(" ") 将接受的以空格拆开
+			String[] arr = line.split(" ");
+			// 拆分后进行赋值
+			goods[i] = new Goods(arr[0],
+								 Double.parseDouble(arr[1]),
+								 Integer.parseInt(arr[2])
+								 );
+			
+		}
+		
+		Order order = new Order();
+		order.setGoods(goods);
+		
+		System.out.println("请输入本次折扣 1-9");
+		String discountStr = scanner.nextLine();
+		order.setDiscount(Integer.parseInt(discountStr));
+		
+		System.out.println("请输入实付金额");
+		String moneyStr = scanner.nextLine();
+		order.setMoney(Double.parseDouble(moneyStr));
+		
+		System.out.println(order);
+	}
+}
+
+class Goods{
+	//物品的属性
+	private String name;
+	private double price;
+	private Integer buy;
+	
+	public Goods(String name,double price,Integer buy){
+		this.name = name;
+		this.price = price;
+		this.buy = buy;
+	}
+	
+	public double getTotol(){
+		return this.price*this.buy;
+	}
+	
+	public String toString(){
+		return this.name+"\t"+this.price+"\t"+this.buy+"\t"+this.getTotol();
+	}
+	
+}
+
+class Order{
+	private Integer discount = 10;
+	private double money;
+	//在order中关键一个Goods的类型一边接受Gooods
+	private Goods[] goods;
+	
+	public void setDiscount(Integer discount){
+		this.discount = discount;
+	}
+	public void setMoney(double money){
+		this.money = money;
+	}
+	public void setGoods(Goods[] goods){
+		this.goods = goods;
+	}
+	
+	//计算折后价
+	public double getTotolMoney(){
+		double totol = 0;
+		for(int i= 0; i<goods.length; i++){
+			totol = totol + goods[i].getTotol();
+		}
+		return totol*this.discount*0.1;
+	}
+	
+	//计算找零
+	public double getChange(){
+		return this.money - this.getTotolMoney();
+	}
+	
+	//打印发票
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("******************消费单******************").append("\n")
+		  .append("名称\t金额\t数量\t总价").append("\n");
+		for(int i = 0; i<goods.length; i++){
+			sb.append(goods[i].toString()).append("\n");
+		}
+		sb.append("------------------------------------------").append("\n")
+	      .append("本次折扣").append(this.discount).append("折").append("\n")
+		  .append("本次消费总额").append(this.getTotolMoney()).append("\n")
+		  .append("实收金额").append(this.money).append("\n")
+		  .append("找零").append(this.getChange()).append("\n");
+		  return sb.toString();
+	}
+}
+
+

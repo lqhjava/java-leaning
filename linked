@@ -1,0 +1,140 @@
+# java-leaning
+This is  I learn java
+interface ISequence {
+    //在pos位置插入val
+    boolean add(int pos,Object data);
+    //查找关键字key 找到返回key的下标，没有返回null
+    int search(Object key);
+    //查找是否包含关键字key是否在顺序表当中(这个和search有点冲突)
+    boolean contains(Object key);
+    //得到pos位置的值
+    Object getPos(int pos);
+    //删除第一次出现的关键字key
+    Object remove(Object key);
+    //得到顺序表的长度
+    int size();
+    //打印顺序表
+    void display();
+    //清空顺序表以防内存泄漏
+    void clear();
+}
+public class Squenceimpl implements ISequence {
+    private Object[] elemData;
+    private int usedSize;
+    public static final int DEFAULT_CAPACITY = 10;
+
+    public Squenceimpl(){
+        this.elemData = new Object[DEFAULT_CAPACITY];
+        this.usedSize = 0;
+    }
+    private boolean isFull(){
+       return this.usedSize ==   this.elemData.length;
+
+    }
+
+    @Override
+    public boolean add(int pos, Object data) {
+        //1 判断pos的合法性，以及放入数据后是否会发生数据溢出
+
+        if(pos < 0 || pos > this.usedSize){
+            return false;
+        }
+        if(isFull()){
+            //对数组扩容
+            this.elemData = Arrays.copyOf(this.elemData,
+                    this.elemData.length*2);
+        }
+        //2 挪数据
+        for (int i = this.usedSize-1; i >= pos ; i--) {
+            this.elemData[i+1] = this.elemData[i];
+        }
+        //3  添加数据， usedSize++
+        this.elemData[pos] =data;
+        this.usedSize++;
+        return true;
+    }
+
+    private boolean isEmpty(){
+        return this.usedSize == 0;
+    }
+    @Override
+    public int search(Object key) {
+        if (key == null){
+            throw new UnsupportedOperationException("不可以传入null");
+        }
+        if(isEmpty()){
+            return -1;
+        }
+
+        //从0开始遍历
+        for (int i = 0; i <this.usedSize ; i++) {
+            if(this.elemData[i].equals(key)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean contains(Object key) {
+        if(key == null){
+            throw new UnsupportedOperationException("不可以将null作为参数");
+        }
+        if(isEmpty()){
+            return false;
+        }
+        for (int i = 0; i < this.usedSize; i++) {
+            if(this.elemData[i].equals(key)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Object getPos(int pos) {
+        if (pos <0 || pos >=this.usedSize){
+            return null;
+        }
+        return this.elemData[pos];
+    }
+
+    @Override
+    public Object remove(Object key) {
+        if(contains(key) ||isEmpty()){
+                return null;
+        }
+        Object oldData = this.elemData[search(key)];
+        int i =0;
+        for ( i = search(key); i <this.usedSize-1; i++) {
+            this.elemData[i] = this.elemData[i+1];
+        }
+        //挪移后，最后一位还有值
+        this.elemData[i+1] =null;
+        //删除后，数据减少
+        this.usedSize--;
+        return true;
+    }
+
+    @Override
+    public int size() {
+        return this.usedSize;
+    }
+
+    @Override
+    public void display() {
+        for (int i = 0; i < this.usedSize; i++) {
+            System.out.print(this.elemData[i]+"  ");
+
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i <this.usedSize ; i++) {
+                this.elemData[i] = null;
+        }
+        this.usedSize = 0;
+    }
+}

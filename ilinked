@@ -1,0 +1,225 @@
+# java-leaning
+This is  I learn java
+package com.lqh.impl;
+
+public interface ILinked {
+    //头插法
+    void addFirst(int data);
+
+    //尾插法
+    void addLast(int data);
+
+    //任意位置插入,第一个数据节点为0号下标
+    boolean addindex(int index, int data);
+
+    //查找是否包含关键字key是否在单链表当中
+    boolean contains(int key);
+
+    //删除第一次出现关键字为key的节点
+   int remove(int key);
+
+    //删除所有值为key的节点
+    void removeAllKey(int key);
+
+    //得到单链表的长度
+    int getLength();
+
+    void display();
+
+    void clear();
+}
+
+package com.lqh.dao;
+
+import com.lqh.impl.ILinked;
+
+public class ILinkedimpl implements ILinked {
+
+    //先创建一个节点类型的类
+    class Node{
+        private int data;
+        private Node next;
+
+        public Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+    //创建一个头节点
+    private Node head;
+    public ILinkedimpl(){
+        this.head = null;
+    }
+    @Override
+    //头插法
+    public void addFirst(int data) {
+        Node node =new Node(data);
+        //先查看链表里是否有数据
+        if(this.head == null){
+            //链表里没有数据
+            this.head = node;
+        }else {
+            //链表里有数据
+            node.next = this.head;
+            this.head = node;
+        }//完成插入
+
+    }
+
+    @Override
+    //尾插法
+    public void addLast(int data) {
+        Node node =new Node(data);
+        //创建一个节点来遍历链表
+        Node cur = this.head;
+
+        //检查链表是否为空
+        if(this.head == null){
+            //链表为空
+            this.head = node;
+        }else {
+            //链表不为空
+            //遍历链表，找到尾节点
+            while (cur.next != null) {
+                //开始遍历
+                cur = cur.next;
+            }
+            cur.next = node;
+        }
+    }
+
+    private void isIndexOk(int index){
+        if(index < 0 || index >getLength()){
+            throw new IndexOutOfBoundsException("下标不合法");
+        }
+
+    }
+    private Node findIndex(int index){
+        isIndexOk(index);
+        Node cur = this.head;
+        int count = 0;
+        if(index == 0){
+            return null;
+        }
+        while(cur.next != null && count != index-1){
+            cur = cur.next;
+            count++;
+        }
+        return cur;
+    }
+
+    @Override
+    //指定位置插入
+    public boolean addindex(int index, int data) {
+        Node node = new Node(data);
+        //首先对index判定合法性
+        //找到index的位置
+        Node cur = findIndex(index);
+        //判断cur
+        if(cur == null){
+            //相当于头插
+            node.next = this.head;
+            this.head = node;
+        }else{
+            //将上一个节点.next引用给node
+            node.next = cur.next;
+            cur.next = node;
+        }
+        return false;
+    }
+
+    @Override
+    //查找数据是否在链表里
+    public boolean contains(int key) {
+        Node cur = this.head;
+        if(this.head == null){
+            return false;
+        } else{
+            while(cur.next != null){
+                if(cur.data == key){
+                    return true;
+                }
+                cur = cur.next;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    //删除第一次出现关键字为key的节点
+    public int remove(int key) {
+        Node cur = this.head;
+        if(head.data == key){;
+            this.head = head.next;
+            return  1;
+        }else {
+
+            while (cur.next != null) {
+                if (cur.next.data == key) {
+                    break;
+                }
+                cur = cur.next;
+            }
+            cur.next = cur.next.next;
+            return 1;
+        }
+    }
+
+    @Override
+    //删除链表里的所有的key
+    public void removeAllKey(int key) {
+        Node cur = this.head;
+        while(cur.next !=null){
+            if(this.head.data == key){
+                this.head = this.head.next;
+            }else if(cur.next.data == key){
+                cur.next = cur.next.next;
+            }else{
+                cur = cur.next;
+            }
+        }
+
+
+    }
+
+    @Override
+    //获取链表的长度
+    public int getLength() {
+        Node cur = this.head;
+        int count = 0;
+        while(cur.next != null){
+            cur = cur.next;
+            count++;
+        }
+        return count;
+    }
+
+    @Override
+    //打印链表
+    public void display() {
+        Node cur = this.head;
+        if(cur == null){
+            System.out.println("没有数据");
+        }else{
+            while(cur != null){
+                System.out.print(cur.data+"  ");
+                cur = cur.next;
+            }
+        System.out.println();
+        }
+    }
+
+    @Override
+    //清除链表
+    public void clear() {
+
+        while(head != null){
+
+            if(head.next != null) {
+                head.next = head.next.next;
+            }
+            head = null;
+        }
+
+    }
+}

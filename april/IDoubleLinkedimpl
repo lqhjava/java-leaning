@@ -1,0 +1,189 @@
+package com.lqh.dao;
+
+import com.lqh.impl.IDoubleLinked;
+
+public class IDoubleLinkedimpl implements IDoubleLinked {
+
+    class Node {
+        private int data;
+        private Node prev;
+        private Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+    }
+
+    private Node head;
+    private Node last;//标志尾巴
+
+    public IDoubleLinkedimpl() {
+        this.head = null;
+        this.last = null;
+
+    }
+
+
+    @Override
+    public void addFirst(int data) {
+        Node node = new Node(data);
+        if(this.head == null){
+            //第一次插入
+            this.head = node;
+            this.last = node;
+        }else{
+            node.next = this.head;
+            node.next.prev = node;
+            this.head = node;
+
+        }
+    }
+
+    @Override
+    public void addLast(int data) {
+        Node node = new Node(data);
+        if(this.head == null){
+            this.head = node;
+            this.last = node;
+        }else{
+            this.last.next = node;
+            node.prev = this.last;
+            this.last = node;
+        }
+    }
+
+    private void isIndexOk(int index){
+        if(index < 0 || index >getLength()){
+            throw new NullPointerException("下标不合法");
+        }
+    }
+    private Node findIndex(int index){
+        isIndexOk(index);
+        Node cur = this.head;
+        int count = 0;
+        while(count < index){
+            cur = cur.next;
+            count++;
+        }
+        return cur;
+    }
+    @Override
+    public boolean addindex(int index, int data) {
+        Node node = new Node(data);
+        Node cur = findIndex(index);
+        if(index == 0){
+            addFirst(data);
+            return true;
+        }else if(index == getLength()){
+            addLast(data);
+            return true;
+        }
+            node.next = cur;
+            cur.prev.next = node;
+            node.prev = cur.prev;
+            cur.prev = node;
+            return true;
+    }
+
+    @Override
+    public boolean contains(int key) {
+        Node cur = this.head;
+        while(cur.next != null){
+            if(cur.data == key){
+                return true;
+            }
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    @Override
+    public int remove(int key) {
+        Node cur = this.head;
+        int oldData = 0;
+        while(cur != null){
+            if(cur.data == key){
+                oldData = cur.data;
+                if(cur == this.head){
+                    //删除头节点
+                    this.head = this.head.next;
+                    this.head.prev = null;
+                    return oldData;
+                } else{
+                    cur.prev.next = cur.next;
+                    if(cur.next == null) {
+                        cur.next.prev = cur.prev;
+                    }else{
+                        //删除尾节点，last前移
+                        this.last = cur.prev;
+                    }
+                }
+                return oldData;
+            }
+            cur = cur.next;
+        }
+        return oldData;
+    }
+
+    @Override
+    public void removeAllKey(int key) {
+        Node cur = this.head;
+        int oldData = key;
+        while(cur.next != null){
+            if(cur.data == key){
+                if(cur == this.head){
+                    //删除头节点
+                    this.head = this.head.next;
+                    this.head.prev = null;
+                } else{
+                    cur.prev.next = cur.next;
+                    if(cur.next == null) {
+                        cur.next.prev = cur.prev;
+                    }else{
+                        //删除尾节点，last前移
+                        this.last = cur.prev;
+                    }
+                }
+            }
+            cur = cur.next;
+        }
+    }
+
+    @Override
+    public int getLength() {
+        Node cur = this.head;
+        int count = 0;
+        while(cur != null){
+            count++;
+            cur = cur.next;
+        }
+        return count;
+    }
+
+    @Override
+    public void display() {
+        Node cur = this.head;
+        if(this.head == null){
+            System.out.println("没有数据");
+        }else {
+            while (cur != null) {
+                System.out.print(cur.data + "  ");
+                cur = cur.next;
+            }
+            System.out.println();
+        }
+    }
+
+    @Override
+    public void clear() {
+        while(this.head != null){
+            Node cur = this.head.next;
+            head = null;
+            //head.prev = null;
+            head = cur;
+        }
+        last = null;
+    }
+}

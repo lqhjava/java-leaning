@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        //创建一个null节点作为前驱结点
+        ListNode prev = null;
+            while(cur != null){
+                //创建一个cur的后继节点
+                ListNode curNext = cur.next;
+                //遍历一个节点，就将它的next指向prev
+                cur.next = prev;
+                //prev后移一位
+                prev = cur;
+                cur = curNext;
+            }
+        return prev;
+    }
+}

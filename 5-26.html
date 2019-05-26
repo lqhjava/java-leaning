@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>广告布局</title>
+		<style type="text/css">
+		     
+		    .header div{
+		    	/*左浮动*/
+		    	float: left;
+				width: 33.33%;
+				height: 60px;
+				/*行高*/
+				line-height: 50px;
+		    }
+		    /*去掉超连接的既a标签的下划线 */
+		    a{
+		    	/**/
+				text-decoration: none;
+		    }
+		    /*控制超链接的内边距*/
+		   .header a{
+		   	padding: 15px;
+		   }
+			.header{
+				width: 100%;
+			}
+			.cle {
+				clear: both;
+			}
+			
+			/*导航栏部分*/
+			.menu{
+				width: 100%;
+				background-color: #000;
+				height: 50px;
+				padding-top: 1px;
+			
+			}
+			
+			.menu ul li{
+				/*去掉标记*/
+				list-style-type: none;
+				/*将元素设置为同一行*/
+				display:inline ;
+			}
+			
+			.menu a{
+				font-size: 17px;
+				color: #fff;
+				padding: 10px;
+			}
+			
+			/*轮播图*/
+			.lunbo{
+				width: 100%;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			.lunbo img{
+				width: 100%;
+			}
+			/*最新商品*/
+			/*左边大图*/
+			.left{
+				float: left;
+				width: 16%;
+				height: 500px;
+			}
+			/*右边图*/
+			.ringht{
+				float: left;
+				width: 84%;
+				text-align: center;
+				height: 500px;
+			}
+			/*右边大图*/
+			.big{
+				float: left;
+				width: 50%;
+				height: 250px;
+			}
+			/*其余小图*/
+			.small{
+				float: left;
+				width: 16.6%;
+				height: 250px;
+			}
+			
+			/*广告图片*/
+			.adv{
+				width: 100%;
+			}
+			.adv img {
+				width: 100%;
+			}
+			
+			/*页脚部分*/
+			.foot{
+				width: 100%;
+			}
+			.foot p{
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--
+        	这个 界面一共有8个部分
+        	一个div中嵌套8个子div
+        -->
+        
+       <div >
+       	<!--
+       	第一个部分  顶部标签图
+       -->
+       <div class="header">
+       		<div >
+       			<img src="img/img/logo2.png"/ height="50px">
+       		</div>
+       		<div id="">
+       			<img src="img/img/header.png"/ >
+       		</div>
+       		<div id="">
+       			<a href="#">登陆</a>
+       			<a href="#">注册</a>
+       			<a href="#">购物车</a>
+       			
+       		</div>
+       		
+            </div>
+       	
+       </div>
+       <!--清除左浮动的div-->
+            <div class="cle"></div> 
+            
+            <!--
+            	第二部分 导航栏部分 4个超链接
+            -->
+            <div class="menu">
+
+            	<ul>
+					<li><a href="#">首页</a></li>
+					<li><a href="#">手机数码</a></li>
+					<li><a href="#">电脑办公</a></li>
+					<li><a href="#">其他</a></li>
+				</ul>
+            </div>
+       	
+       	<!--第三部分  轮播图-->
+           <div class="lunbo">
+
+           	<img src="img/img/3.jpg"/>
+           </div>
+           <!--第四部分 最欣商品 -->
+           <div class="new">
+
+           		<div >
+           			<h2 style="display: inline;">最欣商品</h2>
+           			<img src="img/img/title2.jpg"/>
+           		</div>
+           		<!--左边大图div-->
+           		<div class="left">
+           			<img src="img/素材/products/hao/big01.jpg"/>
+           		</div>
+           		<div class = "ringht">
+           			<!--右边大图div-->
+           				<div class="big">
+           					<img src="img/素材/products/hao/middle01.jpg"/>
+           				</div>
+           			<!--右边小图div-->
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第9个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第8个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第7个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第6个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第5个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第4个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第3个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第2个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第1个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				
+           		</div>
+           </div>
+           <!--第5部分 广告图片 -->
+           <div class="adv">
+           	<img src="img/素材/products/hao/ad.jpg"/>
+           </div>
+           <!--第六部分 最欣商品 -->
+           <div class="new">
+
+           		<div class="">
+           			<h2 style="display: inline;">最欣商品</h2>
+           			<img src="img/img/title2.jpg"/>
+           		</div>
+           		<!--左边大图div-->
+           		<div class="left">
+           			<img src="img/素材/products/hao/big01.jpg"/>
+           		</div>
+           		<div class = "ringht">
+           			<!--右边大图div-->
+           				<div class="big">
+           					<img src="img/素材/products/hao/middle01.jpg"/>
+           				</div>
+           			<!--右边小图div-->
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第9个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第8个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第7个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第6个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第5个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第4个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第3个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第2个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				<div class="small">
+           					<img src="img/素材/products/hao/small03.jpg"/>
+           					<p><a href="#">最后第1个电饭煲</a></p>
+           					<p><font color="red">$99998</font></p>
+           				</div>
+           				
+           		</div>
+           </div>
+           <!--第七部分 质量广告 -->
+           <div class="pre">
+           	<img src="img/img/footer.jpg"/>
+           </div>
+           <!--第八部分 页脚 -->
+           <div class="foot">
+           		<p>
+					<a href="#">关于我们</a>
+					<a href="#">联系我们</a>
+					<a href="#">加入我们</a>
+				</p>
+				<p>
+					Copyright 2018-2020 XX商城 &copy;
+				</p>
+           </div>
+           	
+           
+       </div>
+       
+		
+		
+	</body>
+</html>

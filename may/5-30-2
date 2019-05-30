@@ -1,0 +1,28 @@
+import java.util.*;
+
+
+public class Main{
+    
+    public static void main(String[] args){
+        Scanner sc = new  Scanner(System.in);
+        int  n =0;
+        if(sc.hasNextInt()){
+            n = sc.nextInt();
+        }
+        int[] arr = new int[10000];
+        arr[0] = 0;
+        arr[1] = 1;
+        arr[2] = 1;
+        int i = 2;
+        while(arr[i] < n){
+            i++;
+            arr[i] = arr[i-1]+ arr[i-2];
+            
+        }
+        if((arr[i]-n) < (n-arr[i-1]) ){
+            System.out.println(arr[i]-n);
+        }else{
+            System.out.println(n-arr[i-1]);
+        }
+    }
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lqh.mapper.OrderMapper">
+
+    <select id="queryOrderToUser" resultType="com.lqh.po.UserEx">
+        select
+	        orders.*,
+            user.username,
+            user.sex,
+            user.address
+    from
+	        orders,user
+    where
+	        orders.user_id = user.id;
+    </select>
+
+
+
+    <resultMap id="queryOrderToItemsResultMap" type="com.lqh.po.Orders">
+        <!--orders-->
+        <!--user   association-->
+        <!--orderdetail   collection-->
+        <id column="id" property="id"/>
+        <result column="user_id" property="userid"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="note" property="note"/>
+        <association property="user" javaType="com.lqh.po.User">
+            <id column="user_id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+        </association>
+        <collection property="orderdetail" ofType="com.lqh.po.Orderdetail">
+            <id column="OrderDetailID" property="id"/>
+            <result column="orders_id" property="ordersId"/>
+            <result column="items_id" property="itemsId"/>
+            <result column="items_num" property="itemsNum"/>
+            <!--items  collection-->
+            <association property="items" javaType="com.lqh.po.Items">
+                <id column="ItemsID" property="id"/>
+                <result column="name" property="name"/>
+                <result column="detail" property="detail"/>
+                <result column="price" property="price"/>
+            </association>
+        </collection>
+
+
+    </resultMap>
+    <select id="queryOrderToItems" resultMap="queryOrderToItemsResultMap">
+        select
+            orders.*,
+            user.username,
+            user.address,
+            user.sex,
+            orderdetail.id as OrderDetailID,
+            orderdetail.orders_id,
+            orderdetail.items_id,
+            orderdetail.items_num,
+            items.id as ItemsID,
+            items.name,
+            items.detail,
+            items.price
+        from
+            orders,
+            user,
+            orderdetail,
+            items
+        where
+            orders.user_id = user.id
+            and
+            orders.id = orderdetail.orders_id
+            and
+            orderdetail.items_id = items.id;
+    </select>
+
+</mapper>
